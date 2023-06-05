@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>敲木魚積功德</title>
+  <style>
+    body {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    #container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+    }
+
+    #counter {
+      font-size: 24px;
+      margin-bottom: 10px;
+      text-align: center;
+    }
+
+    #matchstick-img {
+      width: 100px;
+      height: 100px;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <h1>敲木魚積功德</h1>
+  <img id="mokugyo" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRzeSBtjO0T2k7fFSnq7gvHi5nTYecr4TDBzw&usqp=CAU" alt="木魚圖片" width="200" height="200">
+  <div id="counter">
+     <p>（點擊這個木魚！）</p>
+     <h2>木魚敲敲，功德積積</h2>
+  </div>
+  <button onclick="calculateMerit()">功德結算</button>
+  <div id="matchstick"></div>
+
+  <script>
+    var counter = 0;
+    var audio = new Audio();
+
+    audio.src = 'https://drive.google.com/uc?export=download&id=1N2TMC4OnIposgzSuG2DcsuOiQPXda1pd';
+
+    function calculateMerit() {
+      var message = '';
+      if (counter >= 100) {
+        message = '同學您這次敲了' + counter + '次木魚。這邊建議你不用再讀了，請直接火化吧。';
+
+        var matchstickImg = document.createElement('img');
+        matchstickImg.id = 'matchstick-img';
+        matchstickImg.src = 'https://w7.pngwing.com/pngs/627/870/png-transparent-brown-matchstick-match-com-match-stick-wood-matchbox-flame-thumbnail.png'; 
+        document.getElementById('matchstick').appendChild(matchstickImg);
+
+        var matchstickText = document.createElement('div');
+        matchstickText.id = 'matchstick-text';
+        matchstickText.innerText = '需要火化的話，這邊借你一根火柴，不用謝。';
+        matchstickText.style.textAlign = 'center';
+        document.getElementById('matchstick').appendChild(matchstickText);
+      } else if (counter >= 60) {
+        message = '同學您這次敲了' + counter + '次木魚。我看你是業障真的很多齁。';
+      } else if (counter >= 30) {
+        message = '同學您這次敲了' + counter + '次木魚。別再敲了，快去讀書！';
+      } else {
+        message = '同學您這次敲了' + counter + '次木魚。施主阿彌陀佛，祝您期末考歐趴。';
+      }
+      alert(message);
+    }
+
+    document.getElementById('mokugyo').addEventListener('click', function() {
+      var text = document.createElement('div');
+      text.innerHTML = '功德+1';
+      document.body.appendChild(text);
+      counter++;
+
+      audio.currentTime = 0;
+      audio.play();
+
+      setTimeout(function() {
+        document.body.removeChild(text);
+      }, 1000);
+    });
+
+    //版本紀錄：
+    //0605一版：敲木魚、功德+1、功德結算
+    //0606二版：敲木魚達到一定次數跳出不同系統訊息、敲木魚音效
+
+  </script>
+</body>
+</html>
