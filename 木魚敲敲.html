@@ -39,7 +39,17 @@
   <script>
     var counter = 0;
     function calculateMerit() {
-      alert('您這次總共敲了' + counter +'次木魚，施主阿彌陀佛，祝您期末考歐趴。' );
+      var message = '';
+      if (counter >= 100) {
+        message = '同學您這次敲了' + counter + '次木魚。這邊建議你不用再讀了，請直接火化吧';
+      } else if (counter >= 60) {
+        message = '同學您這次敲了' + counter + '次木魚。我看你是業障真的很多齁';
+      } else if (counter >= 30) {
+        message = '同學您這次敲了' + counter + '次木魚。別再敲了，快去讀書';
+      } else {
+        message = '同學您這次敲了' + counter + '次木魚。施主阿彌陀佛，祝您期末考歐趴。';
+      }
+      alert(message);
     }
 
     document.getElementById('mokugyo').addEventListener('click', function() {
