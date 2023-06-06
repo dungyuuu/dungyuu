@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>敲木魚積功德</title>
+  <style>
+    body {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    button {
+      font-size: 20px;
+      padding: 8px 16px;
+    }
+
+    #container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start; /* 修改為從頂部對齊 */
+      height: 100%;
+    }
+
+    #counter {
+      font-size: 24px;
+      margin-bottom: 10px;
+      text-align: center;
+    }
+
+    #matchstick-img {
+      width: 200px;
+      height: 200px;
+      margin-top: 10px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    #merit-messages {
+      margin-top: 10px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <h1>敲木魚積功德</h1>
+  <div id="container">
+    <img id="mokugyo" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRzeSBtjO0T2k7fFSnq7gvHi5nTYecr4TDBzw&usqp=CAU" alt="木魚圖片" width="200" height="200">
+    <div id="counter">
+       <p>（點擊這個木魚！）</p>
+       <h2>木魚敲敲，功德積積</h2>
+    </div>
+    <button onclick="calculateMerit()">功德結算</button>
+    <div id="merit-messages"></div>
+    
+    <div id="matchstick"></div>
+  </div>
+
+  <script>
+    var counter = 0;
+    var audio = new Audio();
+    var matchstickCreated = false;
+
+    audio.src = 'https://drive.google.com/uc?export=download&id=1N2TMC4OnIposgzSuG2DcsuOiQPXda1pd';
+
+    function calculateMerit() {
+      var message = '';
+      if (counter >= 500) {
+        message = '你已敲木魚成佛，拜託別再敲ㄌ';
+      } else if (counter >= 100) {
+        message = '同學您這次敲了' + counter + '次木魚。這邊建議你不用再讀了，請直接火化吧。';
+
+        if (!matchstickCreated) {
+          var matchstickImg = document.createElement('img');
+          matchstickImg.id = 'matchstick-img';
+          matchstickImg.src = 'https://w7.pngwing.com/pngs/627/870/png-transparent-brown-matchstick-match-com-match-stick-wood-matchbox-flame-thumbnail.png'; 
+          matchstickImg.style.textAlign = 'center';
+          document.getElementById('matchstick').appendChild(matchstickImg);
+
+          var matchstickText = document.createElement('div');
+          matchstickText.id = 'matchstick-text';
+          matchstickText.innerText = '\n需要火化的話，\n這邊借你一根火柴，不用謝。';
+          matchstickText.style.textAlign = 'center';
+          document.getElementById('matchstick').appendChild(matchstickText);
+
+          matchstickCreated = true;
+        }
+      } else if (counter >= 60) {
+        message = '同學您這次敲了' + counter + '次木魚。我看你是業障真的很多齁。';
+      } else if (counter >= 30) {
+        message = '同學您這次敲了' + counter + '次木魚。別再敲了，快去讀書！';
+      } else {
+        message = '同學您這次敲了' + counter + '次木魚。施主阿彌陀佛，祝您期末考歐趴。';
+      }
+      alert(message);
+    }
+
+    function updateMokugyo() {
+      var container = document.getElementById('container');
+      var mokugyoImg = document.getElementById('mokugyo');
+      mokugyoImg.src = 'https://images.plurk.com/3NzgEpDmkgl6hbkQnkw3AJ.jpg';
+      mokugyoImg.alt = '法師圖片';
+      mokugyoImg.style.width = '600px'; /* 固定為原始大小 */
+      mokugyoImg.style.height = '400px'; /* 固定為原始大小 */
+      mokugyoImg.style.objectFit = 'cover'; /* 使用 cover 保持比例填滿容器 */
+      mokugyoImg.style.objectPosition = 'center top'; /* 使用 center top 保持圖片置中 */
+      mokugyoImg.removeEventListener('click', handleClick);
+      mokugyoImg.addEventListener('click', function() {
+        var text = document.createElement('div');
+        text.innerHTML = '年輕人，你再按我就超渡你！';
+        container.insertBefore(text, document.getElementById('merit-messages')); /* 插入到按鈕下方 */
+        counter++;
+
+        audio.currentTime = 0;
+        audio.play();
+
+        setTimeout(function() {
+          container.removeChild(text);
+      }, 1000);
+    });
+
+      // Remove matchstick image and text
+      var matchstick = document.getElementById('matchstick');
+      if (matchstickCreated) {
+        matchstick.innerHTML = '';
+        matchstickCreated = false;
+      }
+    }
+
+    function handleClick() {
+      var text = document.createElement('div');
+      text.innerHTML = '功德+1';
+      var meritMessages = document.getElementById('merit-messages');
+      meritMessages.appendChild(text);
+      counter++;
+
+      audio.currentTime = 0;
+      audio.play();
+
+      setTimeout(function() {
+        meritMessages.removeChild(text);
+      }, 1000);
+
+      if (counter === 500) {
+        updateMokugyo();
+      }
+    }
+
+    document.getElementById('mokugyo').addEventListener('click', handleClick);
+
+    //版本紀錄：
+    //0605一版：敲木魚、功德+1、功德結算
+    //0606二版：敲木魚達到一定次數跳出不同系統訊息、敲木魚音效
+    //0607三版：敲木魚達到1000次時，法師會跳出來超渡你
+
+  </script>
+</body>
+</html>
