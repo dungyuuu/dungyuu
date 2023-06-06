@@ -21,7 +21,7 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: flex-start; /* 修改為從頂部對齊 */
+      justify-content: flex-start; 
       height: 100%;
     }
 
@@ -70,7 +70,7 @@
     function calculateMerit() {
       var message = '';
       if (counter >= 500) {
-        message = '你已敲木魚成佛，拜託別再敲ㄌ';
+        message = '您已敲木魚成佛，拜託別再敲ㄌ';
       } else if (counter >= 100) {
         message = '同學您這次敲了' + counter + '次木魚。這邊建議你不用再讀了，請直接火化吧。';
 
@@ -104,15 +104,15 @@
       var mokugyoImg = document.getElementById('mokugyo');
       mokugyoImg.src = 'https://images.plurk.com/3NzgEpDmkgl6hbkQnkw3AJ.jpg';
       mokugyoImg.alt = '法師圖片';
-      mokugyoImg.style.width = '600px'; /* 固定為原始大小 */
-      mokugyoImg.style.height = '400px'; /* 固定為原始大小 */
-      mokugyoImg.style.objectFit = 'cover'; /* 使用 cover 保持比例填滿容器 */
-      mokugyoImg.style.objectPosition = 'center top'; /* 使用 center top 保持圖片置中 */
+      mokugyoImg.style.width = '600px';
+      mokugyoImg.style.height = '400px';
+      mokugyoImg.style.objectFit = 'cover';
+      mokugyoImg.style.objectPosition = 'center top';
       mokugyoImg.removeEventListener('click', handleClick);
       mokugyoImg.addEventListener('click', function() {
         var text = document.createElement('div');
         text.innerHTML = '年輕人，你再按我就超渡你！';
-        container.insertBefore(text, document.getElementById('merit-messages')); /* 插入到按鈕下方 */
+        container.insertBefore(text, document.getElementById('merit-messages'));
         counter++;
 
         audio.currentTime = 0;
@@ -128,6 +128,11 @@
       if (matchstickCreated) {
         matchstick.innerHTML = '';
         matchstickCreated = false;
+      }
+
+      if (counter >= 500) {
+        var counterText = document.getElementById('counter').querySelector('p');
+        counterText.innerHTML = '（戳戳這位淨空法師！）';
       }
     }
 
@@ -155,7 +160,7 @@
     //版本紀錄：
     //0605一版：敲木魚、功德+1、功德結算
     //0606二版：敲木魚達到一定次數跳出不同系統訊息、敲木魚音效
-    //0606三版：敲木魚達到1000次時，法師會跳出來超渡你
+    //0607三版：敲木魚達到500次時，法師會跳出來超渡你
 
   </script>
 </body>
