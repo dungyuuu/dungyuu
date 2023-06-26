@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>敲木魚積功德</title>
+  <link rel="icon" type="image/png" href="https://upload.wikimedia.org/wikipedia/commons/thumb/e/ee/Red_Cross_icon.svg/2048px-Red_Cross_icon.svg.png">
+  <style>
+    body {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    button {
+      font-size: 20px;
+      padding: 8px 16px;
+    }
+
+    #container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start; 
+      height: 100%;
+    }
+
+    #counter {
+      font-size: 24px;
+      margin-bottom: 10px;
+      text-align: center;
+    }
+
+    #matchstick-img {
+      width: 200px;
+      height: 200px;
+      margin-top: 10px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    #merit-messages {
+      margin-top: 10px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <h1>敲木魚積功德</h1>
+
+  <div id="container">
+    <img id="mokugyo" src="https://scontent.ftpe11-2.fna.fbcdn.net/v/t39.30808-6/350347868_589500803330078_4587449235581903607_n.jpg?_nc_cat=108&cb=99be929b-59f725be&ccb=1-7&_nc_sid=8bfeb9&_nc_ohc=BkxyDMLNppcAX9N8iPi&_nc_ht=scontent.ftpe11-2.fna&oh=00_AfCdXXRS9wwdNChBvQnx4as0fXi46Fah7n8c40OmZqoVpw&oe=649E6981" alt="木魚圖片" width="200" height="250">
+    <div id="counter">
+       <p>（點擊寫信雲的大頭貼！）</p>
+       <h2>木魚敲敲敲，昕芸快快好</h2>
+    </div>
+    <button onclick="calculateMerit()">功德結算</button>
+    <div id="merit-messages"></div>
+    
+    <div id="matchstick"></div>
+  </div>
+
+  <script>
+    var counter = 0;
+    var audio = new Audio();
+    var matchstickCreated = false;
+
+    audio.src = 'https://drive.google.com/uc?export=download&id=1N2TMC4OnIposgzSuG2DcsuOiQPXda1pd';
+
+    function calculateMerit() {
+      var message = '';
+      if (counter >= 500) {
+        message = '您已敲寫信雲的頭成佛，拜託別再敲ㄌ';
+      } else if (counter >= 100) {
+        message = '同學您這次敲了' + counter + '次寫信雲的頭。這邊建議你不用再敲了，請直接把謝昕芸火化吧。';
+
+        if (!matchstickCreated) {
+          var matchstickImg = document.createElement('img');
+          matchstickImg.id = 'matchstick-img';
+          matchstickImg.src = 'https://w7.pngwing.com/pngs/627/870/png-transparent-brown-matchstick-match-com-match-stick-wood-matchbox-flame-thumbnail.png'; 
+          matchstickImg.style.textAlign = 'center';
+          document.getElementById('matchstick').appendChild(matchstickImg);
+
+          var matchstickText = document.createElement('div');
+          matchstickText.id = 'matchstick-text';
+          matchstickText.innerText = '\n需要火化的話，\n這邊借你一根火柴，不用謝。';
+          matchstickText.style.textAlign = 'center';
+          document.getElementById('matchstick').appendChild(matchstickText);
+
+          matchstickCreated = true;
+        }
+      } else if (counter >= 60) {
+        message = '同學您這次敲了' + counter + '次寫信雲的頭。我看你是真的很希望謝昕芸早日康復齁。';
+      } else if (counter >= 30) {
+        message = '同學您這次敲了' + counter + '次寫信雲的頭。別再敲了，快去放暑假！';
+      } else {
+        message = '同學您這次敲了' + counter + '次寫信雲的頭。施主阿彌陀佛，祝謝昕芸早日康復！';
+      }
+      alert(message);
+    }
+
+    function updateMokugyo() {
+      var container = document.getElementById('container');
+      var mokugyoImg = document.getElementById('mokugyo');
+      mokugyoImg.src = 'https://cdn.hk01.com/di/media/images/dw/20230207/699611340385292288326185.jpeg/4KgcSHvwFMby9TlB0kgd6KaCUaW2GnM1lR985pUffOY?v=w1920r16_9';
+      mokugyoImg.alt = '法師圖片';
+      mokugyoImg.style.width = '400px';
+      mokugyoImg.style.height = '225px';
+      mokugyoImg.style.objectFit = 'cover';
+      mokugyoImg.style.objectPosition = 'center top';
+      mokugyoImg.removeEventListener('click', handleClick);
+      mokugyoImg.addEventListener('click', function() {
+        var text = document.createElement('div');
+        text.innerHTML = '年輕人，你再按我就超渡你！';
+        container.insertBefore(text, document.getElementById('merit-messages'));
+        counter++;
+
+        audio.currentTime = 0;
+        audio.play();
+
+        setTimeout(function() {
+          container.removeChild(text);
+      }, 1000);
+    });
+
+     
+      var matchstick = document.getElementById('matchstick');
+      if (matchstickCreated) {
+        matchstick.innerHTML = '';
+        matchstickCreated = false;
+      }
+
+      if (counter >= 500) {
+        var counterText = document.getElementById('counter').querySelector('p');
+        counterText.innerHTML = '（戳戳這位星雲法師！）';
+      }
+    }
+
+    function handleClick() {
+      var text = document.createElement('div');
+      text.innerHTML = '治癒+1';
+      var meritMessages = document.getElementById('merit-messages');
+      meritMessages.appendChild(text);
+      counter++;
+
+      audio.currentTime = 0;
+      audio.play();
+
+      setTimeout(function() {
+        meritMessages.removeChild(text);
+      }, 1000);
+
+      if (counter === 500) {
+        updateMokugyo();
+      }
+    }
+
+    document.getElementById('mokugyo').addEventListener('click', handleClick);
+
+    //版本紀錄：
+    //0605一版：敲木魚、功德+1、功德結算
+    //0606二版：敲木魚達到一定次數跳出不同系統訊息、敲木魚音效
+    //0607三版：敲木魚達到500次法師會跳出來超渡你、網頁標籤Favicon
+    //0627四版：祝謝昕芸早日康復版本！
+
+  </script>
+</body>
+</html>
