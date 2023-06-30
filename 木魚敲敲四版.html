@@ -48,12 +48,12 @@
   </style>
 </head>
 <body>
-  <h1>敲木魚積功德</h1>
+  <h1><a href="https://youtube.com/shorts/6jQ8JDSidtE">敲木魚積功德</a></h1>
 
   <div id="container">
-    <img id="mokugyo" src="https://scontent.ftpe11-2.fna.fbcdn.net/v/t39.30808-6/350347868_589500803330078_4587449235581903607_n.jpg?_nc_cat=108&cb=99be929b-59f725be&ccb=1-7&_nc_sid=8bfeb9&_nc_ohc=BkxyDMLNppcAX9N8iPi&_nc_ht=scontent.ftpe11-2.fna&oh=00_AfCdXXRS9wwdNChBvQnx4as0fXi46Fah7n8c40OmZqoVpw&oe=649E6981" alt="木魚圖片" width="200" height="250">
+    <img id="mokugyo" src="https://i.imgur.com/ckXQktw.png" alt="木魚圖片" width="250" height="250">
     <div id="counter">
-       <p>（點擊寫信雲的大頭貼！）</p>
+       <p>（點擊寫信雲的大頭貼，敲他ㄉ頭！）</p>
        <h2>木魚敲敲敲，昕芸快快好</h2>
     </div>
     <button onclick="calculateMerit()">功德結算</button>
@@ -71,8 +71,8 @@
 
     function calculateMerit() {
       var message = '';
-      if (counter >= 500) {
-        message = '您已敲寫信雲的頭成佛，拜託別再敲ㄌ';
+      if (counter >= 150) {
+        message = '您已把寫信雲敲成佛，拜託別再敲ㄌ';
       } else if (counter >= 100) {
         message = '同學您這次敲了' + counter + '次寫信雲的頭。這邊建議你不用再敲了，請直接把謝昕芸火化吧。';
 
@@ -132,7 +132,7 @@
         matchstickCreated = false;
       }
 
-      if (counter >= 500) {
+      if (counter >= 150) {
         var counterText = document.getElementById('counter').querySelector('p');
         counterText.innerHTML = '（戳戳這位星雲法師！）';
       }
@@ -152,7 +152,7 @@
         meritMessages.removeChild(text);
       }, 1000);
 
-      if (counter === 500) {
+      if (counter === 150) {
         updateMokugyo();
       }
     }
